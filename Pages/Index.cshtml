@@ -1,0 +1,51 @@
+﻿@page
+@model BitcoinPriceViewer.Pages.IndexModel
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-lg border-0 rounded-4 text-center">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">💰 قیمت لحظه‌ای بیت‌کوین</h4>
+
+                    <div id="price-box">
+                        @if (Model.Price.HasValue)
+                        {
+                            <h2 class="text-success fw-bold" id="btc-price">
+                                @Model.Price.Value.ToString("C")
+                            </h2>
+                        }
+                        else
+                        {
+                            <p class="text-danger">خطا در دریافت قیمت!</p>
+                        }
+                    </div>
+
+                    <p class="text-muted mt-3">🔁 بروزرسانی خودکار هر ۳۰ ثانیه</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    async function updatePrice() {
+        try {
+            const response = await fetch('/price');
+            const data = await response.json();
+            const priceElement = document.getElementById('btc-price');
+            if (data.price && priceElement) {
+                priceElement.textContent = data.price.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD'
+                });
+            }
+        } catch (error) {
+            console.error("Error fetching price:", error);
+        }
+    }
+
+    setInterval(updatePrice, 30000); // هر ۳۰ ثانیه رفرش
+</script>
