@@ -3,7 +3,6 @@
 
 [![.NET](https://img.shields.io/badge/.NET-8.0-purple?logo=dotnet)](https://dotnet.microsoft.com/)  
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)  
-[![Live Demo](https://img.shields.io/badge/Live-Demo-orange?logo=vercel)](#demo)
 
 ---
 
